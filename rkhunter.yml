@@ -1,0 +1,7 @@
+--- # Use this playbook to install rkhunter on all Linux hosts
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  roles:
+    - rkhunter

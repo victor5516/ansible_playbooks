@@ -1,0 +1,94 @@
+
+
+
+
+    - name: "AllowTcpForwarding (YES --> NO)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#AllowTcpForwarding yes"
+          # The String to Replace
+          line: "AllowTcpForwarding no"
+          backrefs: yes
+          backup: yes
+    - name: "ClientAliveCountMax (3 --> 2)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#ClientAliveCountMax 3"
+          # The String to Replace
+          line: "ClientAliveCountMax 2"
+          backrefs: yes
+          backup: yes
+    - name: "X11Forwarding  (YES --> NO)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "X11Forwarding yes"
+          # The String to Replace
+          line: "X11Forwarding no"
+          backrefs: yes
+          backup: yes
+    - name: "TCPKeepAlive   (YES --> NO)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "TCPKeepAlive yes"
+          # The String to Replace
+          line: "TCPKeepAlive no"
+          backrefs: yes
+          backup: yes
+    - name: "MaxAuthTries (6 --> 2)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#MaxAuthTries 6"
+          # The String to Replace
+          line: "MaxAuthTries 2"
+          backrefs: yes
+          backup: yes
+
+    - name: "MaxSessions (10 --> 2)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#MaxSessions 10"
+          # The String to Replace
+          line: "MaxSessions 2"
+          backrefs: yes
+          backup: yes
+    - name: "AllowAgentForwarding (YES --> NO)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#AllowAgentForwarding yes"
+          # The String to Replace
+          line: "AllowAgentForwarding no"
+          backrefs: yes
+          backup: yes
+    - name: "Compression  (YES --> NO)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#Compression  delayed"
+          # The String to Replace
+          line: "Compression no"
+          backrefs: yes
+          backup: yes
+    - name: "LogLevel   (INFO --> VERBOSE)"
+      lineinfile:
+          path: /etc/ssh/sshd_config
+          # The String to Search
+          regexp: "#LogLevel  INFO"
+          # The String to Replace
+          line: "LogLevel VERBOSE"
+          backrefs: yes
+          backup: yes
+    # Restart the SSH server
+    - name: Restart the SSH server
+      command: "systemctl restart sshd"
+
+
+
+
+

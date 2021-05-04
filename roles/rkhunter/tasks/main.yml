@@ -1,0 +1,36 @@
+
+# Execute command
+- name: Run rkhunter check
+  command: "rkhunter --check"
+
+# Retrieve logs
+- name: Retrieve rkhunter report log
+  fetch:
+    src: /var/log/{{ item }}
+    dest: /tmp/{{ inventory_hostname }}-{{ ansible_date_time.date }}-{{ item }}
+    flat: yes
+  loop:
+    - rkhunter.log
+
+
+#crate a crontab to update database
+- name: crete crontab to run rkhunter --update weekly
+  cron:
+    name: rkhunter check
+    minute: "0"
+    hour: "23"
+    weekday: "5"
+    job: "rkhunter --update"
+    cron_file: rkhunter-check
+    state: present
+
+#crate a crontab weekly
+- name: crete crontab to run rkhunter --check weekly
+  cron:
+    name: rkhunter check
+    minute: "0"
+    hour: "0"
+    weekday: "6"
+    job: "rkhunter --check"
+    cron_file: rkhunter-check
+    state: present
