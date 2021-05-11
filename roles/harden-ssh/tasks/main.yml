@@ -15,9 +15,9 @@
       lineinfile:
           path: /etc/ssh/sshd_config
           # The String to Search
-          regexp: "#ClientAliveCountMax 3"
+          regexp: "ClientAliveCountMax 2"
           # The String to Replace
-          line: "ClientAliveCountMax 2"
+          line: "#ClientAliveCountMax 3"
           backrefs: yes
           backup: yes
     - name: "X11Forwarding  (YES --> NO)"
@@ -33,16 +33,16 @@
       lineinfile:
           path: /etc/ssh/sshd_config
           # The String to Search
-          regexp: "TCPKeepAlive yes"
+          regexp: "TCPKeepAlive no"
           # The String to Replace
-          line: "TCPKeepAlive no"
+          line: "TCPKeepAlive yes"
           backrefs: yes
           backup: yes
     - name: "MaxAuthTries (6 --> 2)"
       lineinfile:
           path: /etc/ssh/sshd_config
           # The String to Search
-          regexp: "#MaxAuthTries 6"
+          regexp: "MaxAuthTries 6"
           # The String to Replace
           line: "MaxAuthTries 2"
           backrefs: yes
@@ -52,9 +52,9 @@
       lineinfile:
           path: /etc/ssh/sshd_config
           # The String to Search
-          regexp: "#MaxSessions 10"
+          regexp: "MaxSessions 2"
           # The String to Replace
-          line: "MaxSessions 2"
+          line: "#MaxSessions 10"
           backrefs: yes
           backup: yes
     - name: "AllowAgentForwarding (YES --> NO)"
